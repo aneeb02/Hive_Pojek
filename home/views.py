@@ -37,6 +37,7 @@ from django.utils.timezone import now
 
 import os
 from home.utils import load_spam_words
+from decouple import config
 
 
 
@@ -285,7 +286,8 @@ def check_hive_password(request,pk):
   if request.method == "POST":
      entered_password=request.POST.get('password','').strip()
 
-     if entered_password == hive.password:
+     # Use check_password for hashed password comparison
+     if check_password(entered_password, hive.password):
         hive.members.add(request.user)
         return redirect('hive',pk=hive.id)
      else:
@@ -351,8 +353,13 @@ def createHive(request):
         # Get visibility status (public or private)
         status = request.POST.get('status')
 
-        # Get the password only if the hive is private
-        password = request.POST.get('password') if status == 'private' else None
+        # Get the password and hash it if the hive is private
+        password = request.POST.get('password')
+        if status == 'private' and password:
+            from django.contrib.auth.hashers import make_password
+            password = make_password(password)
+        else:
+            password = None
 
         # Create a new Hive object
         hive = Hive.objects.create(
@@ -361,7 +368,7 @@ def createHive(request):
             buzz=request.POST.get('buzz'),
             details=request.POST.get('deets'),  # Changed 'deets' to match form field names
             status=status,  # Set the hive status to public or private
-            password=password if status == 'private' else None,
+            password=password,
             playlist_url=playlist_url,
         )
         
@@ -510,8 +517,8 @@ def videohive(request, hive_id):
     #return render(request,'home/hive_video.html')
 
 def getToken(request):
-    APP_ID = '593278c8e8b048f29c13c30c420f101f'
-    APP_CERTIFICATE = '82321daa3ad94c3d853dd53acc330d1e'
+    APP_ID = config('AGORA_APP_ID')
+    APP_CERTIFICATE = config('AGORA_APP_CERTIFICATE')
     channel_name = request.GET.get('channel')
     uid = request.GET.get('uid')
 
@@ -528,25 +535,8 @@ def getToken(request):
     )
     return JsonResponse({'token': token})
 
-def get_token(request):
-    APP_ID = '593278c8e8b048f29c13c30c420f101f'  # Replace with your Agora App ID
-    APP_CERTIFICATE = '82321daa3ad94c3d853dd53acc330d1e'  # Replace with your Agora App Certificate
-    channel_name = request.GET.get('channel')
-    uid = request.GET.get('uid')
-    role = 1  # Agora Role_Publisher
-    expiration_time_in_seconds = 3600  # 1 hour
-
-    if not channel_name or not uid:
-        return JsonResponse({'error': 'Missing channel or UID'}, status=400)
-
-    current_timestamp = int(time.time())
-    privilege_expired_ts = current_timestamp + expiration_time_in_seconds
-
-    token = RtcTokenBuilder.buildTokenWithUid(
-        APP_ID, APP_CERTIFICATE, channel_name, int(uid), role, privilege_expired_ts
-    )
-
-    return JsonResponse({'token': token})
+# Alias for getToken - uses same implementation
+get_token = getToken
 
 
 @csrf_exempt

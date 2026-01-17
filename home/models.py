@@ -38,7 +38,7 @@ class Hive(models.Model):
         ('private', 'Private'),
   )
   status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='public')
-  password = models.CharField(max_length=255, blank=True, null=True)  # Used only for private hives
+  password = models.CharField(max_length=255, blank=True, null=True)  # Hashed password for private hives (uses Django's make_password)
   
   class Meta:
     ordering = ['-updated', '-created_at']
