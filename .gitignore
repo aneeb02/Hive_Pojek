@@ -6,6 +6,7 @@ __pycache__/
 .Python
 env/
 venv/
+.venv/
 ENV/
 build/
 develop-eggs/
@@ -22,6 +23,8 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+*.sh
+data_backup.json
 
 # Django
 *.log
@@ -30,6 +33,7 @@ db.sqlite3
 db.sqlite3-journal
 /static/
 /media/
+staticfiles_build/
 
 # Environment variables
 .env

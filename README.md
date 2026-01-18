@@ -58,7 +58,7 @@ A feature-rich, real-time chat application built with Django that allows users t
 
 **Database:**
 - SQLite3 (development)
-- PostgreSQL recommended for production
+- PostgreSQL (production/Vercel)
 
 **Real-time:**
 - Redis 5.2.0 (Channel layer)
