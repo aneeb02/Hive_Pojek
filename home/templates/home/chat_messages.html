@@ -1,3 +1,4 @@
+{% load static %}
 {% for chat in chats %}
     <div id="message-{{ chat.id }}" class="thread" data-vanish-time="{{ chat.vanish_time|date:'U' }}">
         <div class="thread__top">
