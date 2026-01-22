@@ -30,7 +30,7 @@ DEBUG = config('DEBUG', default=True, cast=bool)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='hive-4t5q.onrender.com', cast=Csv())
 
-CSRF_TRUSTED_ORIGINS = ['https://*.vercel.app', 'https://*.render.com']
+CSRF_TRUSTED_ORIGINS = ['https://*.vercel.app', 'https://*.onrender.com']
 
 
 # Application definition
