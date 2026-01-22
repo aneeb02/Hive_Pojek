@@ -39,7 +39,8 @@
     <script src="{% static 'js/script.js' %}"></script>
     <script>
       const hiveId = "{{ hive.id }}";  // Ensure hive.id is passed correctly from Django template
-      const ws = new WebSocket(`ws://${window.location.host}/ws/hive/${hiveId}/`);
+      const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+      const ws = new WebSocket(`${protocol}//${window.location.host}/ws/hive/${hiveId}/`);
   
       ws.onmessage = function(event) {
           const data = JSON.parse(event.data);

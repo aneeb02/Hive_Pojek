@@ -30,7 +30,13 @@ DEBUG = config('DEBUG', default=True, cast=bool)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='hive-4t5q.onrender.com', cast=Csv())
 
-CSRF_TRUSTED_ORIGINS = ['https://*.vercel.app', 'https://*.onrender.com']
+CSRF_TRUSTED_ORIGINS = [
+    'https://hive-4t5q.onrender.com',
+    'https://*.vercel.app',
+    'https://*.onrender.com',
+    'http://localhost:3000',
+    'http://127.0.0.1',
+]
 
 
 # Application definition
@@ -75,6 +81,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'pojek.urls'
 AUTH_USER_MODEL = 'home.User'
+
+# CSRF and Security Settings
+CSRF_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_HTTPONLY = False  # Must be False for JavaScript to access it
+SESSION_COOKIE_SECURE = not DEBUG
+SECURE_SSL_REDIRECT = not DEBUG
 
 TEMPLATES = [
     {
