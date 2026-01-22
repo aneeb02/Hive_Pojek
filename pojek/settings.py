@@ -93,7 +93,7 @@ TEMPLATES = [
     },
 ]
 
-#WSGI_APPLICATION = 'pojek.wsgi.application'
+WSGI_APPLICATION = 'pojek.wsgi.application'
 
 
 
@@ -163,8 +163,6 @@ MEDIA_ROOT = BASE_DIR / 'static/images'
 def load_spam_words():
     with open(os.path.join(BASE_DIR, 'spam_words.txt'), 'r') as file:
         return [word.strip().lower() for word in file.read().split(',')]
-
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

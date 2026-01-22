@@ -1,0 +1,49 @@
+/* styles.css */
+
+/* General Body Style */
+
+/* Custom Input Style */
+.custom-input {
+  background-color: #0f1320;  /* Input background color */
+  color: #fff;  /* White text */
+  border-radius: 30px;  /* Rounded corners */
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: none;  /* No shadow */
+}
+
+/* Input Placeholder */
+.custom-input::placeholder {
+  color: #6c757d;  /* Lighter gray placeholder */
+}
+
+/* Custom Button Style */
+.login {
+  background-color: #6f42c1;  /* Bright red button color */
+  border: none;  /* No border */
+  border-radius: 30px;  /* Rounded corners */
+  padding: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.login:hover {
+  background-color: #563495;  /* Darker red on hover */
+}
+
+
+.text-danger:hover {
+  text-decoration: underline;  /* Underline on hover */
+}
+
+
+body {
+  background-color: #5a5959;
+  color: #a29e9e;
+  transition: background-color 0.3s, color 0.3s;
+ 
+}
+
+body.dark-mode {
+  background-color: #2b2a2a;
+  color: #ffffff;
+}
