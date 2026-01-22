@@ -28,9 +28,9 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-&awvf87baj)&nx$jinrg+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1', cast=Csv())
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='hive-4t5q.onrender.com', cast=Csv())
 
-CSRF_TRUSTED_ORIGINS = ['https://*.vercel.app']
+CSRF_TRUSTED_ORIGINS = ['https://*.vercel.app', 'https://*.render.com']
 
 
 # Application definition
