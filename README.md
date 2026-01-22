@@ -4,11 +4,11 @@ A feature-rich, real-time chat application built with Django that allows users t
 
 ![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
 ![Django](https://img.shields.io/badge/Django-5.1.3-green.svg)
-![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 ## ✨ Features
 
 ### 🎯 Core Features
+
 - **Real-time Chat** - WebSocket-powered instant messaging
 - **Topic-based Hives** - Create or join rooms organized by topics
 - **Public & Private Hives** - Password-protected private rooms
@@ -17,32 +17,38 @@ A feature-rich, real-time chat application built with Django that allows users t
 - **Search** - Find hives by topic, name, or description
 
 ### 👥 User Management
+
 - **User Profiles** - Customizable profiles with avatars and bios
 - **Activity Feed** - See recent messages and user activity
 - **Top Users Leaderboard** - Discover most active community members
 
 ### 🎭 Role-Based Permissions
+
 - **Queen** (Creator) - Full control over the hive
 - **Moderator** - Can kick members and create polls
 - **Bee** (Member) - Regular participant
 
 ### 💬 Advanced Messaging
+
 - **Pin Messages** - Highlight important messages
 - **Vanishing Messages** - Auto-delete messages after 30 seconds
 - **Spam Filtering** - Automatic offensive content detection
 - **Message History** - Full chat history per hive
 
 ### 📞 Communication
+
 - **Video Calls** - Powered by Agora RTC
 - **Audio Calls** - Voice-only communication
 - **Lobby System** - Pre-call waiting room
 
 ### 📊 Engagement
+
 - **Polls** - Create and vote on polls within hives
 - **Reactions** - Interactive engagement features
 - **Spotify Integration** - Background music playlists
 
 ### 🎨 Customization
+
 - **Theme Switching** - Light/Dark mode per hive
 - **Custom Avatars** - Personalize your profile
 
@@ -51,24 +57,29 @@ A feature-rich, real-time chat application built with Django that allows users t
 ## 🛠️ Tech Stack
 
 **Backend:**
+
 - Django 5.1.3
 - Django REST Framework 3.15.2
 - Django Channels 4.2.0 (WebSockets)
 - Daphne 4.1.2 (ASGI server)
 
 **Database:**
+
 - SQLite3 (development)
 - PostgreSQL (production/Vercel)
 
 **Real-time:**
+
 - Redis 5.2.0 (Channel layer)
 - channels-redis 4.2.1
 
 **Video/Audio:**
+
 - Agora RTC SDK
 - agora-token-builder 1.0.0
 
 **Frontend:**
+
 - Django Templates
 - Vanilla JavaScript
 - CSS3
@@ -86,12 +97,14 @@ A feature-rich, real-time chat application built with Django that allows users t
 ## 🚀 Installation & Setup
 
 ### 1. Clone the Repository
+
 ```bash
 git clone https://github.com/yourusername/Hive_Pojek.git
 cd Hive_Pojek
 ```
 
 ### 2. Create Virtual Environment
+
 ```bash
 # Windows
 python -m venv venv
@@ -103,6 +116,7 @@ source venv/bin/activate
 ```
 
 ### 3. Install Dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
@@ -134,11 +148,13 @@ AGORA_APP_CERTIFICATE=your-agora-certificate
 ```
 
 **How to get Agora credentials:**
+
 1. Sign up at [Agora.io](https://www.agora.io/)
 2. Create a new project
 3. Copy your App ID and App Certificate
 
 **Generate a new SECRET_KEY:**
+
 ```python
 python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
 ```
@@ -146,6 +162,7 @@ python -c "from django.core.management.utils import get_random_secret_key; print
 ### 5. Install and Start Redis
 
 **Windows:**
+
 ```bash
 # Download Redis from https://github.com/microsoftarchive/redis/releases
 # Or use WSL/Docker
@@ -153,29 +170,34 @@ docker run -d -p 6380:6379 redis
 ```
 
 **macOS:**
+
 ```bash
 brew install redis
 redis-server --port 6380
 ```
 
 **Linux:**
+
 ```bash
 sudo apt-get install redis-server
 redis-server --port 6380
 ```
 
 ### 6. Database Setup
+
 ```bash
 python manage.py makemigrations
 python manage.py migrate
 ```
 
 ### 7. Create Superuser (Optional)
+
 ```bash
 python manage.py createsuperuser
 ```
 
 ### 8. Run Development Server
+
 ```bash
 python manage.py runserver
 ```
@@ -227,6 +249,7 @@ Hive_Pojek/
 ## 🎮 Usage
 
 ### Creating a Hive
+
 1. Click "Create Hive" button
 2. Enter hive name (buzz), topic, and description
 3. Choose public or private
@@ -234,18 +257,21 @@ Hive_Pojek/
 5. Click create
 
 ### Joining a Hive
+
 1. Browse available hives on homepage
 2. Click on a hive to join
 3. For private hives, enter the password
 4. Start chatting!
 
 ### Starting a Video Call
+
 1. Inside a hive, click "Video Call"
 2. Wait in the lobby
 3. Other members can join
 4. Enjoy your call!
 
 ### Creating a Poll
+
 1. Inside a hive, click "Create Poll" (Queen/Moderator only)
 2. Enter question and options
 3. Members can vote
@@ -256,6 +282,7 @@ Hive_Pojek/
 ## 🔧 API Endpoints
 
 ### Available Endpoints
+
 ```
 GET  /api/                    # List all routes
 GET  /api/hives/              # Get all hives
@@ -270,6 +297,7 @@ POST /api/signup/             # User registration
 ## 🧪 Testing
 
 Run tests (when available):
+
 ```bash
 python manage.py test
 ```
@@ -281,6 +309,7 @@ python manage.py test
 ### Production Checklist
 
 1. **Environment Variables**
+
    ```env
    DEBUG=False
    SECRET_KEY=<strong-random-key>
@@ -292,6 +321,7 @@ python manage.py test
    - Update `DATABASES` in settings.py
 
 3. **Static Files**
+
    ```bash
    python manage.py collectstatic
    ```
@@ -315,42 +345,55 @@ python manage.py test
 ## 🐛 Troubleshooting
 
 ### Redis Connection Error
+
 ```
 Error: Connection refused (Redis)
 ```
+
 **Solution:** Make sure Redis is running on port 6380:
+
 ```bash
 redis-server --port 6380
 ```
 
 ### WebSocket Connection Failed
+
 ```
 WebSocket connection failed
 ```
-**Solution:** 
+
+**Solution:**
+
 - Ensure Daphne is running (not runserver)
 - Check `CHANNEL_LAYERS` configuration in settings.py
 - Verify Redis is accessible
 
 ### Agora Token Error
+
 ```
 Error: Invalid Agora credentials
 ```
+
 **Solution:**
+
 - Verify `AGORA_APP_ID` and `AGORA_APP_CERTIFICATE` in `.env`
 - Check credentials in Agora console
 - Ensure `.env` file is loaded
 
 ### Import Error: decouple
+
 ```
 ModuleNotFoundError: No module named 'decouple'
 ```
+
 **Solution:**
+
 ```bash
 pip install python-decouple
 ```
 
 ### Database Migration Issues
+
 ```bash
 # Reset migrations (development only!)
 python manage.py migrate --fake home zero
@@ -368,12 +411,6 @@ Contributions are welcome! Please follow these steps:
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
----
-
-## 📝 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
 
 ---
 
