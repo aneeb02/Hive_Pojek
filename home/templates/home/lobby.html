@@ -65,8 +65,12 @@ let handleSubmit = async (e) => {
   };
   form.addEventListener("submit", handleSubmit);
 
-    // After storing the session data, create WebSocket connection
-    const socket = new WebSocket(`ws://127.0.0.1:8000/ws/hive/${hiveName}/`);
+
+    const protocol = window.location.protocol === "https:" ? "wss" : "ws";
+    const socket = new WebSocket(
+        `${protocol}://${window.location.host}/ws/hive/`
+    );
+    
 
     // Handle WebSocket events
     socket.onopen = function () {

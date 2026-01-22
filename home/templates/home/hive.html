@@ -290,7 +290,7 @@
     const name = "{{hive.buzz}}"
     toastr.success(`Welcome To ${name}!`);
     const hiveId = "{{ hive.id }}";
-    const chatSocket = new WebSocket(`ws://${window.location.host}/ws/hive/${hiveId}/`);
+    const chatSocket = new WebSocket(`wss://${window.location.host}/ws/hive/${hiveId}/`);
 
     chatSocket.onopen = function () {
       console.log("WebSocket connection established");
