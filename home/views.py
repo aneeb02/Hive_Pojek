@@ -140,7 +140,7 @@ def home(request):
   return render(request, 'home/home.html', context)
 
 # CRUD Operations
-@login_required
+@login_required(login_url='login')
 def hive(request, pk):
     hive = get_object_or_404(Hive, id=pk)
     #chats = hive.message_set.all().order_by('-created_at')
@@ -249,7 +249,7 @@ def hive(request, pk):
     }
     return render(request, 'home/hive.html', context)
 
-@login_required
+@login_required(login_url='login')
 def send_vanishing_message(request, hive_id):
     """
     View for sending a vanishing message to a specific hive.
@@ -584,7 +584,7 @@ def poll_list(request, hive_id):
     polls = hive.polls.all()
     return render(request, 'home/poll_list.html', {'hive': hive, 'polls': polls})
 
-@login_required
+@login_required(login_url='login')
 def poll_detail(request, poll_id):
     poll = get_object_or_404(Poll, id=poll_id)
     hive_id = poll.hive.id  # Assuming Poll has a ForeignKey to Hive
@@ -607,7 +607,7 @@ def poll_detail(request, poll_id):
     return render(request, "home/poll_detail.html", {"poll": poll, "hive_id": hive_id})
 
 
-@login_required
+@login_required(login_url='login')
 def submit_vote(request):
     if request.method == "POST":
         option_id = request.POST.get("option")  # Get the selected option ID from the form
@@ -630,7 +630,7 @@ def submit_vote(request):
     return redirect("homepage")  # Fallback redirect if accessed via GET
 
 
-@login_required
+@login_required(login_url='login')
 def create_poll(request, hive_id):
     hive = get_object_or_404(Hive, id=hive_id)
 
@@ -694,7 +694,7 @@ def save_edited_photo(request, hive_id):
     return JsonResponse({"success": False, "error": "Invalid request method."})
 
 
-@login_required
+@login_required(login_url='login')
 def fetch_chats(request, hive_id):
     hive = get_object_or_404(Hive, id=hive_id)
     chats = hive.message_set.all().order_by("-created_at")  # Assuming Message model is linked to Hive

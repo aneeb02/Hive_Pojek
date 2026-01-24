@@ -83,10 +83,14 @@ ROOT_URLCONF = 'pojek.urls'
 AUTH_USER_MODEL = 'home.User'
 
 # CSRF and Security Settings
-CSRF_COOKIE_SECURE = not DEBUG
-CSRF_COOKIE_HTTPONLY = False  # Must be False for JavaScript to access it
-SESSION_COOKIE_SECURE = not DEBUG
+# CSRF_COOKIE_SECURE = not DEBUG
+# CSRF_COOKIE_HTTPONLY = False  # Must be False for JavaScript to access it
+# SESSION_COOKIE_SECURE = not DEBUG
 SECURE_SSL_REDIRECT = not DEBUG
+
+
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
 TEMPLATES = [
     {
