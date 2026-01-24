@@ -57,15 +57,27 @@ INSTALLED_APPS = [
 ]
 ASGI_APPLICATION = 'pojek.asgi.application'
 
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            "hosts": [(config('REDIS_HOST', default='127.0.0.1'),
-                        config('REDIS_PORT', default=6380, cast=int))],
+# Configure channel layers - use Redis in production if available, else use in-memory
+REDIS_URL = config('REDIS_URL', default=None)
+
+if REDIS_URL:
+    # Use Redis if a connection URL is provided (e.g., from Redis Cloud or Render Redis add-on)
+    CHANNEL_LAYERS = {
+        'default': {
+            'BACKEND': 'channels_redis.core.RedisChannelLayer',
+            'CONFIG': {
+                "hosts": [REDIS_URL],
+            },
         },
-    },
-}
+    }
+else:
+    # Fall back to in-memory channel layer (suitable for development/single-dyno deployments)
+    # Note: This doesn't persist across dyno restarts and doesn't work with multiple dynos
+    CHANNEL_LAYERS = {
+        'default': {
+            'BACKEND': 'channels.layers.InMemoryChannelLayer'
+        }
+    }
 
 
 MIDDLEWARE = [
